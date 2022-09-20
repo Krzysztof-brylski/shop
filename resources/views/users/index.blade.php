@@ -18,8 +18,8 @@
                 <th scope="row">{{$user->id}}</th>
                 <td>{{$user->email}}</td>
                 <td>{{$user->name}}</td>
-                <td>{{$user->surname}}</td>
-                <td>{{$user->phone_number}}</td>
+                <td>@if($user->surname == null) ### @else {{$user->surname}}@endif</td>
+                <td>@if($user->phone_number == null) ### @else {{$user->phone_number}}@endif</td>
                 <td>-</td>
             </tr>
         @endforeach
