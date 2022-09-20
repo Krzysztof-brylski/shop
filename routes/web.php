@@ -1,5 +1,6 @@
 <?php
 use \App\Http\Controllers\HelloControler;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// giga petarda opcja xd te middleware
+Route::get('/users/list',[UserController::class,'index'])->middleware('auth');
 
-Route::get('/hello',[HelloControler::class,'show']);
+
 
 Auth::routes();
 
