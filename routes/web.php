@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 // giga petarda opcja xd te middleware
 Route::get('/users/list',[UserController::class,'index'])->middleware('auth');
-
+Route::delete('/users/{id}',[UserController::class,'destroy'])->middleware('auth');
 
 
 Auth::routes();

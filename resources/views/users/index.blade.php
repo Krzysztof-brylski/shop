@@ -22,7 +22,7 @@
                 <td>{{$user->name}}</td>
                 <td>@if($user->surname == null) ### @else {{$user->surname}}@endif</td>
                 <td>@if($user->phone_number == null) ### @else {{$user->phone_number}}@endif</td>
-                <td>-</td>
+                <td><button  class="btn btn-danger btn-sm delete-button" data-id="{{$user->id}}">X</button></td>
             </tr>
         @endforeach
         </tbody>
@@ -30,4 +30,23 @@
 </div>
 {{$users->links()}}
 
+@endsection
+@section('javascript')
+<script type="module" defer>
+$(function () {
+    $('.delete-button').click(function(){
+        const id = $(this).data("id");
+        $.ajax({
+            method:"DELETE",
+            url:"/users/" + id,
+        }).done(function (response) {
+            alert("SUCCES");
+            window.location.reload();
+        }).fail(function (response) {
+            alert("ERROR");
+        })
+    });
+
+});
+</script>
 @endsection
