@@ -32,21 +32,8 @@
 
 @endsection
 @section('javascript')
-<script type="module" defer>
-$(function () {
-    $('.delete-button').click(function(){
-        const id = $(this).data("id");
-        $.ajax({
-            method:"DELETE",
-            url:"/users/" + id,
-        }).done(function (response) {
-            alert("SUCCES");
-            window.location.reload();
-        }).fail(function (response) {
-            alert("ERROR");
-        })
-    });
-
-});
-</script>
+    const deleteUrl="{{ url('users') }}/";
+@endsection
+@section('js-files')
+    @vite('resources/js/delete.js')
 @endsection

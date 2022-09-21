@@ -79,6 +79,10 @@
             @yield('content')
         </main>
     </div>
-    @yield('javascript')
+    <script>
+        @yield('javascript')
+    </script>
+
+    @yield('js-files')
 </body>
 </html>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 
 class UserController extends Controller
 {
@@ -77,15 +79,22 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return JsonResponse
      */
-    public function destroy($id)
-    {
-        $user=User::find($id);
-        $user->delete();
-        return response()->json([
-            "status"=>'succes',
-        ]);
+    public function destroy(user $user)
+    {   try{
+        throw new \Exception();
+            $user->delete();
+            return response()->json([
+                "status"=>'succes',
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                "status"=>'error',
+                "message"=>'error',
+            ])->setStatusCode(500);
+        }
+
     }
 }
