@@ -83,8 +83,8 @@ class UserController extends Controller
      * @return JsonResponse
      */
     public function destroy(user $user)
-    {   try{
-        throw new \Exception();
+    {
+        try{
             $user->delete();
             return response()->json([
                 "status"=>'succes',
