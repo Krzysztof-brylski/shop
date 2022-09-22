@@ -6,6 +6,7 @@ use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProductsController extends Controller
@@ -102,6 +103,10 @@ class ProductsController extends Controller
     public function destroy(Products $Products)
     {
         try{
+
+            if(!is_null($Products->image)){
+                Storage::disk('public')->delete($Products->image);
+            }
             $Products->delete();
             return response()->json([
                 "status"=>'succes',
