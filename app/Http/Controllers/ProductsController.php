@@ -41,6 +41,9 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product= new Products($request->all());
+        if($request->hasFile('image')){
+            $product->image = $request->file('image')->store('products','public');
+        }
         $product->save();
         return redirect(route('products.index'));
     }
@@ -82,6 +85,9 @@ class ProductsController extends Controller
     {
         if (isset($Products)) {
             $Products->fill($request->all());
+            if($request->hasFile('image')){
+                $Products->image = $request->file('image')->store('products','public');
+            }
             $Products->save();
             return redirect(route('products.index'));
         }

@@ -39,7 +39,9 @@
                                 </div>
                             </div>
 
-
+                            <div class="row justify-content-center">
+                                <img style="width: 350px;height: 250px;" src="{{asset('storage/'.$product->image)}}">
+                            </div>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
