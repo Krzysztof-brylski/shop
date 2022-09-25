@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header">{{__('product.Titles.Edit_form',['name'=>$product->name])}}</div>
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('products.update', $product->id) }}">
+                        <form method="POST" enctype="multipart/form-data" id="product_edit_form" action="{{ route('products.update', $product->id) }}">
                             @csrf
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{__('Name')}}</label>
@@ -62,9 +62,29 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="row mb-3">
-                                <label for="image" class="col-md-4 col-form-label text-md-end">{{__('Image')}}</label>
+                                <label for="image" class="col-md-4 col-form-label text-md-end">{{__('Categories')}}</label>
+
+                                <div class="col-md-6">
+                                    <select id="category_id" form="product_edit_form" class="form-control @error('category_id') is-invalid @enderror" name="category_id">
+                                        <option value="">Brak</option>
+                                        @foreach($categories as $category )
+                                            @if($product->hasSelectedCategory($category->id))
+                                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                            @else
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="category_id" class="col-md-4 col-form-label text-md-end">{{__('Image')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="image" type="file" class="form-control @error('price') is-invalid @enderror"  name="image">

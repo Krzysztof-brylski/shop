@@ -20,6 +20,7 @@
             <th scope="col">{{__('Description')}}</th>
             <th scope="col">{{__('Amount')}}</th>
             <th scope="col">{{__('Price')}}</th>
+            <th scope="col">{{__('Category')}}</th>
             <th scope="col">{{__('Action')}}</th>
         </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{{$product->description}}</td>
                 <td>{{$product->amount}}</td>
                 <td>{{$product->price}}</td>
+                <td>@if($product->hasCategory()){{$product->category->name}}@endif</td>
                 <td>
                     <a href="{{route('products.show',$product)}}"><button  class="btn btn-info btn-sm ">O</button></a>
                     <a href="{{route('products.edit',$product)}}"><button  class="btn btn-success btn-sm ">E</button></a>

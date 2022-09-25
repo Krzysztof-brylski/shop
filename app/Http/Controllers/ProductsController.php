@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpsertProductsRequest;
 use App\Models\Products;
+use App\Models\ProductsCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
@@ -31,7 +32,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products/create');
+        return view('products/create',[
+            'categories'=>ProductsCategories::all(),
+        ]);
     }
 
     /**
@@ -42,8 +45,9 @@ class ProductsController extends Controller
      */
     public function store(UpsertProductsRequest $request)
     {
-        $product= new Products($request->validated());
 
+        $product= new Products($request->validated());
+        //dd($request->validated());
         if($request->hasFile('image')){
             $product->image = $request->file('image')->store('products','public');
         }
@@ -60,7 +64,7 @@ class ProductsController extends Controller
     public function show(Products $Products)
     {
         return view('products/show',[
-            'product'=>$Products
+            'product'=>$Products,
         ]);
     }
 
@@ -73,7 +77,8 @@ class ProductsController extends Controller
     public function edit(Products $Products)
     {
         return view('products/edit',[
-            'product'=>$Products
+            'product'=>$Products,
+            'categories'=>ProductsCategories::all()
         ]);
     }
 
@@ -88,13 +93,13 @@ class ProductsController extends Controller
     {
         if (isset($Products)) {
             $Products->fill($request->validated());
+
             if($request->hasFile('image')){
                 $Products->image = $request->file('image')->store('products','public');
             }
             $Products->save();
             return redirect(route('products.index'));
         }
-        return redirect(route('products.index'));
     }
 
     /**
