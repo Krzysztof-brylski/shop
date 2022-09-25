@@ -20,7 +20,7 @@ class WelcomeController extends Controller
     public function index(){
         return view('welcome',[
             'products'=>Products::paginate(10),
-            'categories'=>ProductsCategories::all()
+            'categories'=>ProductsCategories::orderby('name','ASC')->get(),
         ]);
     }
 
