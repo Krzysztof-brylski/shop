@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Podgląd Produktu: {{$product->name}}</div>
+                    <div class="card-header">{{__('product.Titles.Show_form',['name'=>$product->name])}}</div>
                     <div class="card-body">
                             @csrf
                             <div class="row mb-3">
@@ -47,7 +47,7 @@
                                 <div class="col-md-6 offset-md-4">
                                     <a href="{{route('products.index')}}">
                                         <button type="submit" class="btn btn-primary">
-                                            Powrót
+                                            {{__('product.Buttons.Back_button')}}
                                         </button>
                                     </a>
                                 </div>

@@ -3,11 +3,11 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-6">
-            <h2>Lista Produktów</h2>
+            <h2>{{__('product.Titles.Product_list')}}</h2>
         </div>
         <div class="col-xl-6">
             <a href="{{route('products.create')}}">
-                <button class="btn btn-success">Dodaj Produkt</button>
+                <button class="btn btn-success">{{__('product.Buttons.Add_button')}}</button>
             </a>
         </div>
     </div>
@@ -16,11 +16,11 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nazwa</th>
-            <th scope="col">Opis</th>
-            <th scope="col">ilość</th>
-            <th scope="col">Cena</th>
-            <th scope="col">Akcje</th>
+            <th scope="col">{{__('Name')}}</th>
+            <th scope="col">{{__('Description')}}</th>
+            <th scope="col">{{__('Amount')}}</th>
+            <th scope="col">{{__('Price')}}</th>
+            <th scope="col">{{__('Action')}}</th>
         </tr>
         </thead>
         <tbody>

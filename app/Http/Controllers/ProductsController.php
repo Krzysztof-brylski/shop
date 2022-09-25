@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpsertProductsRequest;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -36,12 +37,13 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  UpsertProductsRequest  $request
      * @return Redirect
      */
-    public function store(Request $request)
+    public function store(UpsertProductsRequest $request)
     {
-        $product= new Products($request->all());
+        $product= new Products($request->validated());
+
         if($request->hasFile('image')){
             $product->image = $request->file('image')->store('products','public');
         }
@@ -78,20 +80,21 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
+     * @param  UpsertProductsRequest  $request
      * @param  Products $Products
      * @return redirect
      */
-    public function update(Request $request, Products $Products)
+    public function update(UpsertProductsRequest $request, Products $Products)
     {
         if (isset($Products)) {
-            $Products->fill($request->all());
+            $Products->fill($request->validated());
             if($request->hasFile('image')){
                 $Products->image = $request->file('image')->store('products','public');
             }
             $Products->save();
             return redirect(route('products.index'));
         }
+        return redirect(route('products.index'));
     }
 
     /**

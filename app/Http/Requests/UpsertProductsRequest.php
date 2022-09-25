@@ -13,7 +13,7 @@ class UpsertProductsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpsertProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required|max:500',
+            'description'=>'required|max:1500',
+            'amount'=>'required|integer|min:0',
+            'price'=>'required|numeric|between:0,999999.99',
+            'image'=>'nullable|image|mimes:jpg,png',
         ];
     }
 }

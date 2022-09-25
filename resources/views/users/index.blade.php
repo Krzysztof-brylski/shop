@@ -6,12 +6,12 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Imię</th>
-            <th scope="col">Nazwisko</th>
-            <th scope="col">Nr-telefonu</th>
-            <th scope="col">Akcje</th>
+            <th scope="col">{{__('id')}}</th>
+            <th scope="col">{{__('Email Address')}}</th>
+            <th scope="col">{{__('Name')}}</th>
+            <th scope="col">{{__('Surname')}}</th>
+            <th scope="col">{{__('Phone_number')}}</th>
+            <th scope="col">{{__('Action')}}</th>
         </tr>
         </thead>
         <tbody>

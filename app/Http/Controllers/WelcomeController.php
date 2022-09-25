@@ -15,8 +15,7 @@ class WelcomeController extends Controller
      *
      * @return view
      */
-    public function index()
-    {
+    public function index(){
         return view('welcome',[
             'products'=>Products::paginate(10)
         ]);
