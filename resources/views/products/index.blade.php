@@ -24,9 +24,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($products as $keys=>$product)
+        @foreach($products as $product)
             <tr>
-                <th scope="row">{{$keys+1}}</th>
+                <th scope="row">{{$product->id}}</th>
                 <td>{{$product->name}}</td>
                 <td>{{$product->description}}</td>
                 <td>{{$product->amount}}</td>
@@ -45,7 +45,7 @@
 
 @endsection
 @section('javascript')
-    const deleteUrl="{{url('products') }}/";
+    const deleteUrl="{{url('products') }}";
 @endsection
 @section('js-files')
     @vite('resources/js/delete.js')

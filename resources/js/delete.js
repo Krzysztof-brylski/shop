@@ -2,7 +2,7 @@ $('.delete-button').click(function(){
     const id = $(this).data("id");
 
     $(function () { $wal.fire({
-        title: "Czy napewno chcesz usunąć rekord o id: "+id,
+        title: deleteMessage+" "+id,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: 'Tak',

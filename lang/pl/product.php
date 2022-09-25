@@ -14,6 +14,9 @@ return [
     ],
     'From'=>[
         'Images'=>'Obrazek',
+    ],
+    'Message'=>[
+        'Delete_confirm'=>'Czy napewno chcesz usunąć id:  ',
     ]
 ];
 
