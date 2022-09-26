@@ -81,6 +81,7 @@
     </div>
     <script>
         const deleteMessage="{{__('product.Message.Delete_confirm')}}";
+
         @yield('javascript')
     </script>
 

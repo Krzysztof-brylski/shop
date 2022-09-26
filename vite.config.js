@@ -6,7 +6,9 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/sass/app.scss',
+                'resources/css/all.mini.scs',
                 'resources/js/app.js',
+                'resources/js/filter.js',
                 'resources/js/delete.js',
             ],
             refresh: true,
