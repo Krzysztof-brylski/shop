@@ -3,7 +3,7 @@ $(function () {
     //page limit event listener
     $('div.page_lim a').click(function (event) {
         event.preventDefault();
-        $('a.page_current_lim').text($(this).text(),$('a.page_lim').text());
+        $('a.page_current_lim').text($(this).first().text(),$('a.page_lim').text());
         GetProducts($(this).text(),$('a.current_order_selector').text());
     });
     // order event listener
@@ -11,12 +11,12 @@ $(function () {
     $('div.order_selector a').click(function (event) {
         event.preventDefault();
         $('a.current_order_selector').text($(this).text());
-        GetProducts($('a.page_current_lim').text(),$(this).text());
+        GetProducts($('a.page_current_lim').first().text(),$(this).text());
     });
     // fiters event listener
     $('a.result_btn').click(function (event) {
         event.preventDefault();
-        GetProducts( $('a.page_current_lim').text(),$('a.current_order_selector').text());
+        GetProducts( $('a.page_current_lim').first().text(),$('a.current_order_selector').text());
     });
 
 });

@@ -23,11 +23,10 @@ class WelcomeController extends Controller
 
         $filters = $request->query('filters');
         $paginate = $request->query('paginate') != null ? $request->query('paginate') : 9;
-        $order=$request->query('order') != null ? $request->query('order') :'asc';
+        $order=$request->query('order') != null ? $request->query('order') : 'asc';
         //dd($order);
         $query = Products::query();
         $query->orderBy('price',strtolower($order));
-        $query->paginate($paginate);
         if(!is_null($filters)){
 
             if(array_key_exists('categories',$filters)){
@@ -41,11 +40,11 @@ class WelcomeController extends Controller
             }
 
             return Response()->json([
-                'data' => $query->get()
+                'data'=>$query->get()
             ]);
         }
         return view('welcome',[
-            'products'=>$query->get(),
+            'products'=> $query->paginate($paginate),
             'categories'=>ProductsCategories::orderby('name','ASC')->get(),
         ]);
     }
