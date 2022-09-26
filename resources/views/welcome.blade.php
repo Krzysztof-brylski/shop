@@ -9,14 +9,12 @@
                     <div class="col-xl-6">
                         <div class="nav-item dropdown  float-right">
                             <label class="mr-2">Sort By:</label>
-                            <a id="navbarDropdown" class="btn btn-lg btn-light  dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Relevance <span class="caret"></span>
+                            <a id="navbarDropdown" class="btn btn-lg btn-light current_order_selector dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                ASI <span class="caret"></span>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Relevance</a>
-                                <a class="dropdown-item" href="#">Price Descending</a>
-                                <a class="dropdown-item" href="#">Price Ascending</a>
-                                <a class="dropdown-item" href="#">Best Selling</a>
+                            <div class="dropdown-menu order_selector" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">DESC</a>
+                                <a class="dropdown-item" href="#">ASC</a>
                             </div>
                         </div>
 
@@ -74,10 +72,10 @@
                         </div>
                         <div class="nav-item dropdown  float-right">
                             <label class="mr-2">View:</label>
-                            <a id="navbarDropdown" class="btn btn-lg btn-light  dropdown-toggle page_current_lim"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="btn btn-lg btn-light  dropdown-toggle page_current_limm"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 9 <span class="caret"></span>
                             </a>
-                            <div class="dropdown-menu page_lim" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu page_limm" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">9</a>
                                 <a class="dropdown-item" href="#">18</a>
                                 <a class="dropdown-item" href="#">36</a>

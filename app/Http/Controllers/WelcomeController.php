@@ -22,8 +22,11 @@ class WelcomeController extends Controller
     public function index(Request $request){
 
         $filters = $request->query('filters');
-        $paginate = $request->query('paginate') or 9;
+        $paginate = $request->query('paginate') != null ? $request->query('paginate') : 9;
+        $order=$request->query('order') != null ? $request->query('order') :'asc';
+        //dd($order);
         $query = Products::query();
+        $query->orderBy('price',strtolower($order));
         $query->paginate($paginate);
         if(!is_null($filters)){
 
