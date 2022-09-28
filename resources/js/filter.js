@@ -4,19 +4,22 @@ $(function () {
     $('div.page_lim a').click(function (event) {
         event.preventDefault();
         $('a.page_current_lim').text($(this).first().text(),$('a.page_lim').text());
-        GetProducts($(this).text(),$('a.current_order_selector').text());
+        GetProducts($(this).text(),$('a.current_order_selector').data('order'));
     });
     // order event listener
 
     $('div.order_selector a').click(function (event) {
         event.preventDefault();
+        let order=$(this).data('order');
+
+        $('a.current_order_selector').attr('order',order).data(order);
         $('a.current_order_selector').text($(this).text());
-        GetProducts($('a.page_current_lim').first().text(),$(this).text());
+        GetProducts($('a.page_current_lim').first().text(),order);
     });
     // fiters event listener
     $('a.result_btn').click(function (event) {
         event.preventDefault();
-        GetProducts( $('a.page_current_lim').first().text(),$('a.current_order_selector').text());
+        GetProducts( $('a.page_current_lim').first().text(),$('a.current_order_selector').data('order'));
     });
 
 });
@@ -36,9 +39,9 @@ function GetProducts(paginate,order) {
         ,
     }).done(function (response) {
         $('div#product_container').empty();
-
+        console.log(response);
         $.each(response.data,function (key,product){
-            console.log(product)
+
             $('div#product_container').append(draw_product(product))
 
         });
