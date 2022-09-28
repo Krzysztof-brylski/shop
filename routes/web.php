@@ -22,10 +22,11 @@ Route::get('/',[WelcomeController::class,'index']);
 
 Route::get('/users/list',[UserController::class,'index'])->middleware('auth');
 Route::delete('/users/{user}',[UserController::class,'destroy'])->middleware('auth');
-Route::middleware('auth')->group(function (){
-Route::resource('products',ProductsController::class)->parameters(
-    ['products'=>'Products']
-);
+
+Route::middleware(['auth','verified'])->group(function (){
+    Route::resource('products',ProductsController::class)->parameters(
+        ['products'=>'Products']
+    );
 });
 
 // product routing
@@ -41,6 +42,6 @@ Route::get('/products/edit/{products}',[ProductsController::class,'edit'])->name
 Route::post('/products/{products}',[ProductsController::class,'update'])->name('products.update')->middleware('auth');
 Route::delete('/products/{products}',[ProductsController::class,'destroy'])->name('products.destroy')->middleware('auth');
 */
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
