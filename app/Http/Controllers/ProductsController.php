@@ -63,9 +63,11 @@ class ProductsController extends Controller
      */
     public function show(Products $Products)
     {
+
         return view('products/show',[
             'product'=>$Products,
         ]);
+
     }
 
     /**
@@ -76,10 +78,12 @@ class ProductsController extends Controller
      */
     public function edit(Products $Products)
     {
+
         return view('products/edit',[
             'product'=>$Products,
             'categories'=>ProductsCategories::all()
         ]);
+
     }
 
     /**

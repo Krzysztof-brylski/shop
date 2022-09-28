@@ -32,10 +32,10 @@
                 <td>{{$product->description}}</td>
                 <td>{{$product->amount}}</td>
                 <td>{{$product->price}}</td>
-                <td>@if($product->hasCategory()){{$product->category->name}}@endif</td>
+                <td>@if($product->hasCategory()){{__("welcome.Filters.".$product->category->name)}}@endif</td>
                 <td>
-                    <a href="{{route('products.show',$product)}}"><button  class="btn btn-info btn-sm ">O</button></a>
-                    <a href="{{route('products.edit',$product)}}"><button  class="btn btn-success btn-sm ">E</button></a>
+                    <a href="{{route('products.show',$product->id)}}"><button  class="btn btn-info btn-sm ">O</button></a>
+                    <a href="{{route('products.edit',$product->id)}}"><button  class="btn btn-success btn-sm ">E</button></a>
                     <button  class="btn btn-danger btn-sm delete-button" data-id="{{$product->id}}">X</button>
                 </td>
             </tr>

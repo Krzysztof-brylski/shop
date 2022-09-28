@@ -6,8 +6,9 @@
                 <div class="card">
                     <div class="card-header">{{__('product.Titles.Edit_form',['name'=>$product->name])}}</div>
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" id="product_edit_form" action="{{ route('products.update', $product->id) }}">
+                        <form method="post" enctype="multipart/form-data" id="product_edit_form" action="{{ route('products.update', $product->id) }}">
                             @csrf
+                            @method("PATCH")
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{__('Name')}}</label>
 

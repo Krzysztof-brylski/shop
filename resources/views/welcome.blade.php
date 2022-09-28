@@ -52,7 +52,7 @@
                                          {{$product->name}}
                                     </h4>
                                     <h5 class="card-price medium text-info">
-                                        #{{$product->category->name}}
+                                        # {{__("welcome.Filters.".$product->category->name)}}
                                     </h5>
                                     <h5 class="card-price small text-warning">
                                         <i>PLN {{$product->price}}</i>
