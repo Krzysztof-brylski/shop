@@ -7,6 +7,7 @@
         <thead>
         <tr>
             <th scope="col">{{__('id')}}</th>
+            <th scope="col">{{__('role')}}</th>
             <th scope="col">{{__('Email Address')}}</th>
             <th scope="col">{{__('Name')}}</th>
             <th scope="col">{{__('Surname')}}</th>
@@ -18,6 +19,7 @@
         @foreach($users as $user)
             <tr>
                 <th scope="row">{{$user->id}}</th>
+                <td scope="row">{{$user->role}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->name}}</td>
                 <td>@if($user->surname == null) ### @else {{$user->surname}}@endif</td>
