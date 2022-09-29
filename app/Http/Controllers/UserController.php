@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use mysql_xdevapi\Exception;
 
 class UserController extends Controller
@@ -86,10 +87,13 @@ class UserController extends Controller
     {
         try{
             $user->delete();
+            Session::flash('status',__('alerts.Users.Delete.Delete_Alert',['name'=>$user->name]));
             return response()->json([
                 "status"=>'succes',
             ]);
         }catch (\Exception $e){
+            Session::flash('status',__('alerts.Users.Delete.Delete_Error'));
+            Session::flash('error','error');
             return response()->json([
                 "status"=>'error',
                 "message"=>'error',

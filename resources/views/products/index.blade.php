@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
+
+
+
 <div class="container">
+    @include('helpers.alerts')
+
     <div class="row">
         <div class="col-xl-6">
             <h2>{{__('product.Titles.Product_list')}}</h2>
@@ -11,7 +16,6 @@
             </a>
         </div>
     </div>
-
     <table class="table table-hover">
         <thead>
         <tr>
@@ -47,7 +51,7 @@
 
 @endsection
 @section('javascript')
-    const deleteUrl="{{url('products') }}";
+    const deleteUrl="{{url('products')}}/";
 @endsection
 @section('js-files')
     @vite('resources/js/delete.js')

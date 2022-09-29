@@ -72,7 +72,7 @@
                                     <select id="category_id" form="product_add_form" class="form-control @error('category_id') is-invalid @enderror" name="category_id">
                                         <option value="">Brak</option>
                                         @foreach($categories as $category )
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{$category->id}}">{{__("welcome.Filters.".$category->name)}}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')

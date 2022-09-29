@@ -18,6 +18,7 @@
     "dependencies": {
         "jquery": "^3.6.1",
         "popper.js": "^1.16.1",
-        "sweetalert2": "^11.4.33"
+        "sweetalert2": "^11.4.33",
+        "util.js": "^0.0.0"
     }
 }

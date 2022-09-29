@@ -52,7 +52,11 @@
                                          {{$product->name}}
                                     </h4>
                                     <h5 class="card-price medium text-info">
+                                        @if(isset($product->category->name))
                                         # {{__("welcome.Filters.".$product->category->name)}}
+                                        @else
+                                        # {{__("welcome.Filters.None")}}
+                                        @endif
                                     </h5>
                                     <h5 class="card-price small text-warning">
                                         <i>PLN {{$product->price}}</i>

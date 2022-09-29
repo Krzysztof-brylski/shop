@@ -8,6 +8,7 @@ use App\Models\ProductsCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -47,12 +48,14 @@ class ProductsController extends Controller
     {
 
         $product= new Products($request->validated());
-        //dd($request->validated());
         if($request->hasFile('image')){
             $product->image = $request->file('image')->store('products','public');
         }
-        $product->save();
-        return redirect(route('products.index'));
+        if(!$product->save()) {
+            return redirect(route('products.index'))->with('status',__('alerts.Products.Add.Add_Error'));
+        }
+        return redirect(route('products.index'))->with('status',__('alerts.Products.Add.Add_Alert',['name'=>$product->name]));
+
     }
 
     /**
@@ -101,8 +104,10 @@ class ProductsController extends Controller
             if($request->hasFile('image')){
                 $Products->image = $request->file('image')->store('products','public');
             }
-            $Products->save();
-            return redirect(route('products.index'));
+            if(!$Products->save()){
+                return redirect(route('products.index'))->with('status',__('alerts.Products.Edit.Edit_Error'));
+            }
+            return redirect(route('products.index'))->with('status',__('alerts.Products.Edit.Edit_Alert',['name'=>$Products->name]));
         }
     }
 
@@ -119,11 +124,14 @@ class ProductsController extends Controller
             if(!is_null($Products->image)){
                 Storage::disk('public')->delete($Products->image);
             }
+
+            Session::flash('status',__('alerts.Products.Delete.Delete_Alert',['name'=>$Products->name]));
             $Products->delete();
             return response()->json([
                 "status"=>'succes',
             ]);
         }catch (\Exception $e){
+            Sesssion::flash('status',__('alerts.Products.Delete.Delete_Error'));
             return response()->json([
                 "status"=>'error',
                 "message"=>'error',

@@ -71,9 +71,9 @@
                                         <option value="">Brak</option>
                                         @foreach($categories as $category )
                                             @if($product->hasSelectedCategory($category->id))
-                                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                                <option value="{{$category->id}}" selected>{{__("welcome.Filters.".$category->name)}}</option>
                                             @else
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{$category->id}}">{{__("welcome.Filters.".$category->name)}}</option>
                                             @endif
                                         @endforeach
                                     </select>

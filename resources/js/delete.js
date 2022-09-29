@@ -11,7 +11,7 @@ $('.delete-button').click(function(){
         if(result.value){
             $.ajax({
                 method:"DELETE",
-                url: deleteUrl+'/'+ id,
+                url: deleteUrl+ id,
             }).done(function () {
                 window.location.reload();
             }).fail(function (data) {

@@ -20,5 +20,6 @@ return[
         "Clothes" =>'Ubrania',
         'ASC'=>'Rosnąco',
         'DESC' =>'Malejąco',
+        'None'=>'Brak'
     ],
 ];
