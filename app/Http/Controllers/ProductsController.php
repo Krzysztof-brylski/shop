@@ -51,8 +51,10 @@ class ProductsController extends Controller
         if($request->hasFile('image')){
             $product->image = $request->file('image')->store('products','public');
         }
-        if(!$product->save()) {
-            return redirect(route('products.index'))->with('status',__('alerts.Products.Add.Add_Error'));
+        if($product->save()) {
+            return redirect(route('products.index'))
+                ->with('status',__('alerts.Products.Add.Add_Error'))
+                ->with('error',true);
         }
         return redirect(route('products.index'))->with('status',__('alerts.Products.Add.Add_Alert',['name'=>$product->name]));
 
@@ -105,7 +107,9 @@ class ProductsController extends Controller
                 $Products->image = $request->file('image')->store('products','public');
             }
             if(!$Products->save()){
-                return redirect(route('products.index'))->with('status',__('alerts.Products.Edit.Edit_Error'));
+                return redirect(route('products.index'))
+                    ->with('status',__('alerts.Products.Edit.Edit_Error'))
+                    ->with('error',true);
             }
             return redirect(route('products.index'))->with('status',__('alerts.Products.Edit.Edit_Alert',['name'=>$Products->name]));
         }
