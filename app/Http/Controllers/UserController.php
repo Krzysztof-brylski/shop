@@ -93,7 +93,7 @@ class UserController extends Controller
             ]);
         }catch (\Exception $e){
             Session::flash('status',__('alerts.Users.Delete.Delete_Error'));
-            Session::flash('error','error');
+            Session::flash('error',true);
             return response()->json([
                 "status"=>'error',
                 "message"=>'error',

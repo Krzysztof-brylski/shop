@@ -51,7 +51,7 @@ class ProductsController extends Controller
         if($request->hasFile('image')){
             $product->image = $request->file('image')->store('products','public');
         }
-        if($product->save()) {
+        if(!$product->save()) {
             return redirect(route('products.index'))
                 ->with('status',__('alerts.Products.Add.Add_Error'))
                 ->with('error',true);
@@ -71,6 +71,7 @@ class ProductsController extends Controller
 
         return view('products/show',[
             'product'=>$Products,
+            'suggestions'=>Products::query()->where('category_id','=',$Products->category_id)->get(),
         ]);
 
     }

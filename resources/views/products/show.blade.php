@@ -2,71 +2,81 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{__('product.Titles.Show_form',['name'=>$product->name])}}</div>
-                    <div class="card-body">
-                            @csrf
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{__('Name')}}</label>
+            <main class="mt-5 pt-4">
+                <div class="container dark-grey-text mt-5">
+                    <h2>{{$product->name}}</h2>
+                    <div class="row wow fadeIn">
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name"  value="{{$product->name}}" required readonly autofocus disabled>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="description" class="col-md-4 col-form-label text-md-end">{{__('Description')}}</label>
-
-                                <div class="col-md-6">
-                                    <textarea id="description" type="text" maxlength="1500" class="form-control " name="description" autofocus readonly disabled>{{$product->description}}</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="amount" class="col-md-4 col-form-label text-md-end">{{__('Amount')}}</label>
-
-                                <div class="col-md-6">
-                                    <input id="amount" type="number" min="0" class="form-control" name="amount" value="{{$product->amount}}" disabled required readonly autofocus>
-                                </div>
-                            </div>
-
-
-                            <div class="row mb-3">
-                                <label for="price" class="col-md-4 col-form-label text-md-end">{{__('Price')}}</label>
-
-                                <div class="col-md-6">
-                                    <input id="price" type="number" min="0" step="0.01" class="form-control" name="price" value="{{$product->price}}"  disabled readonly required>
-                                </div>
-                            </div>
-                        <div class="row mb-3">
-                            <label for="category_id" class="col-md-4 col-form-label text-md-end">{{__('Categories')}}</label>
-
-                            <div class="col-md-6">
-                                <select id="category_id" form="product_add_form" class="form-control " name="category_id" disabled>
-                                        @if($product->hasSelectedCategory($product->category->id))
-                                            <option >{{$product->category->name}}</option>
-                                        @else
-                                            <option>Brak</option>
-                                        @endif
-                                </select>
-                            </div>
+                        <!--Grid column-->
+                        <div class="col-md-6 mb-4">
+                            @if(!is_null($product->image))
+                                <img src="{{asset('storage/'.$product->image)}}" class="img-fluid mx-auto d-block img-fluid" style="width: 550px; height: 400px" alt="Card image cap">
+                            @else
+                                <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block img-fluid" style="width: 550px; height: 400px" alt="Card image cap">
+                            @endif
                         </div>
-                            <div class="row justify-content-center">
-                                <img style="width: 350px;height: 250px;" src="{{asset('storage/'.$product->image)}}">
-                            </div>
+                        <!--Grid column-->
 
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <a href="{{route('products.index')}}">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{__('product.Buttons.Back_button')}}
-                                        </button>
+                        <!--Grid column-->
+                        <div class="col-md-6 mb-4">
+
+                            <!--Content-->
+                            <div class="p-4">
+
+                                <div class="mb-3">
+                                    <a href="">
+                                        <span class="badge purple mr-1">{{$product->category->name}}</span>
                                     </a>
                                 </div>
+
+                                <p class="lead">
+                                      <span class="mr-1">
+                                        <del>{{$product->price}}</del>
+                                      </span>
+                                    <span>{{$product->price}} zł</span>
+                                </p>
+
+                                <p class="lead font-weight-bold">Description</p>
+
+                                <p>{{$product->description}}</p>
+
+                                <form class="d-flex justify-content-left">
+                                    <!-- Default input -->
+                                    <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                                    <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+                                        <i class="fas fa-shopping-cart ml-1"></i>
+                                    </button>
+
+                                </form>
+
                             </div>
+                            <!--Content-->
+
+                        </div>
+                        <!--Grid column-->
+
                     </div>
+                    <!--Grid row-->
+
+                    <hr>
+
+                    <!--Grid row-->
+                    <div class="row d-flex justify-content-center wow fadeIn">
+
+                        <h4 class="my-4 h4">Nasze propozycje:</h4>
+                        <div class="row">
+                            @foreach($suggestions as $suggestion)
+
+                                @if($suggestion->id !== $product->id)
+                                    @include('products.product',['product'=>$suggestion])
+                                @endif
+                            @endforeach
+                        </div>
+
+                    </div>
+                    <!--Grid row-->
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 
