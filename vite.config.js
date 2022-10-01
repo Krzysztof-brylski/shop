@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/filter.js',
                 'resources/js/delete.js',
+                'resources/js/cart.js',
             ],
             refresh: true,
         }),

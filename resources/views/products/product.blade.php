@@ -13,17 +13,11 @@
                 {{$product->name}}
             </h4>
             <a class="text-decoration-none" href="{{route('products.show',$product->id)}}">
-                <h5 class="card-price medium text-info">
-                    @if(isset($product->category->name))
-                        # {{__("welcome.Filters.".$product->category->name)}}
-                    @else
-                        # {{__("welcome.Filters.None")}}
-                    @endif
-                </h5>
-                <h5 class="card-price small text-warning">
+                <h5 class="card-price medium">
                     <i>PLN {{$product->price}}</i>
                 </h5>
             </a>
+            <button class="btn btn-success add-cart-button" data-id="{{$product->id}}">Dodaj do koszyka</button>
         </div>
     </div>
 </div>

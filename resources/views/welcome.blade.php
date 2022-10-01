@@ -92,8 +92,10 @@
 @endsection
 @section('javascript')
     const asset = "{{asset('storage/')}}";
+    const cart="{{url('cart')}}/";
 @endsection
 @section('js-files')
 
     @vite(['resources/js/filter.js'])
+    @vite(['resources/js/cart.js'])
 @endsection
