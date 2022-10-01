@@ -71,7 +71,9 @@ class ProductsController extends Controller
 
         return view('products/show',[
             'product'=>$Products,
-            'suggestions'=>Products::query()->where('category_id','=',$Products->category_id)->get(),
+            'suggestions'=>Products::query()->where('category_id','=',$Products->category_id)
+                ->where('id','!=',$Products->id)
+                ->limit(3)->get(),
         ]);
 
     }

@@ -6,7 +6,6 @@
                 <div class="container dark-grey-text mt-5">
                     <h2>{{$product->name}}</h2>
                     <div class="row wow fadeIn">
-
                         <!--Grid column-->
                         <div class="col-md-6 mb-4">
                             @if(!is_null($product->image))
@@ -24,15 +23,11 @@
                             <div class="p-4">
 
                                 <div class="mb-3">
-                                    <a href="">
-                                        <span class="badge purple mr-1">{{$product->category->name}}</span>
-                                    </a>
+                                        <h3 class="text-primary">#{{$product->category->name}}</h3>
                                 </div>
 
                                 <p class="lead">
-                                      <span class="mr-1">
-                                        <del>{{$product->price}}</del>
-                                      </span>
+
                                     <span>{{$product->price}} zł</span>
                                 </p>
 
