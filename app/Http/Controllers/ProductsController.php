@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpsertProductsRequest;
 use App\Models\Products;
 use App\Models\ProductsCategories;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use PhpParser\Node\Stmt\Return_;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ProductsController extends Controller
 {
@@ -104,9 +107,16 @@ class ProductsController extends Controller
     public function update(UpsertProductsRequest $request, Products $Products)
     {
         if (isset($Products)) {
+            $oldImage=$Products->image;
             $Products->fill($request->validated());
 
+
             if($request->hasFile('image')){
+
+                if(Storage::exists($oldImage)){
+                    Storage::delete($oldImage);
+                }
+
                 $Products->image = $request->file('image')->store('products','public');
             }
             if(!$Products->save()){
@@ -119,6 +129,22 @@ class ProductsController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     * @param  Products $Products
+     * @return RedirectResponse|StreamedResponse
+     */
+    public function downloadImage( Products $Products)
+    {
+        if(!is_null($Products->image) and Storage::exists($Products->image)){
+           return Storage::download($Products->image);
+        }
+        return Redirect::back();
+    }
+
+
+
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  Products $Products
@@ -128,8 +154,8 @@ class ProductsController extends Controller
     {
         try{
 
-            if(!is_null($Products->image)){
-                Storage::disk('public')->delete($Products->image);
+            if(!is_null($Products->image) and Storage::exists($Products->image) ){
+                Storage::delete($Products->image);
             }
 
             Session::flash('status',__('alerts.Products.Delete.Delete_Alert',['name'=>$Products->name]));

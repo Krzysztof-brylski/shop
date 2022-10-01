@@ -100,7 +100,10 @@
 
                             <div class="row justify-content-center">
                                 @if(!is_null($product->image))
-                                    <img style="width: 350px;height: 250px;" src="{{asset('storage/'.$product->image)}}">
+                                    <a href="{{ route('products.downloadImage', $product->id)}}" style="width: initial; height: initial;">
+                                        <img style="width: 350px;height: 250px;" src="{{asset('storage/'.$product->image)}}">
+                                    </a>
+
                                 @endif
                             </div>
 

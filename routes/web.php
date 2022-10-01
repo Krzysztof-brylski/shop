@@ -24,6 +24,7 @@ Route::get('/',[WelcomeController::class,'index']);
 
 Route::middleware(['auth','verified'])->group(function (){
     Route::middleware('can:isAdmin')->group(function (){
+        Route::get('/products/{Products}/download',[ProductsController::class,'downloadImage'])->name('products.downloadImage');
         Route::resource('products',ProductsController::class)->parameters(
             ['products'=>'Products']
         );
