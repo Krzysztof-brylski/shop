@@ -1,5 +1,5 @@
 $(function () {
-
+    console.log('xd');
     $('button.add-cart-button').click(function () {
 
         add_to_cart($(this).data("id"))

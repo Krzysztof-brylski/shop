@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\Cart\CartDto;
-use App\Dtos\Cart\CartItemDto;
-use App\Http\Requests\UpsertProductsRequest;
+use App\ValueObjects\Cart;
 use App\Models\Products;
-use App\Models\ProductsCategories;
+use App\ValueObjects\CartItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 use \Illuminate\Support\Facades\Session;
-use function Symfony\Component\Mime\Header\all;
+
 
 class CartController extends Controller
 {
@@ -24,7 +20,12 @@ class CartController extends Controller
      * @return view|JsonResponse
      */
     public function index(){
-        dd(Session::get('cart'));
+        $session=Session::get('cart',new Cart());
+        return view('cart/index', [
+                'cart'=>$session->get_data(),
+                'total'=>$session->get_total()
+            ]
+        );
     }
 
     /**
@@ -35,25 +36,46 @@ class CartController extends Controller
      */
     public function store(Products $Products)
     {
+        $cart = Session::get('cart',new Cart());
 
-        $cart = Session::get('cart',new CartDto());
+        $cart->add_item(new CartItem($Products->id));
 
-        $items=$cart->getCart();
-        if (Arr::exists($items,$Products->id)){
-            $items[$Products->id]->incrementQuantity();
-        }else{
-            $cartItemDto = new CartItemDto($Products,1);
-
-            $items[$Products->id] = $cartItemDto;
-        }
-        $cart->setCart($items);
-        $cart->incrementTotalQuantity();
-        $cart->incrementTotalSum($Products->price);
         Session::put('cart',$cart);
-
-        return Response::json([
-            "status"=>'Success',
+        return Response()->json([
+            'status'=>'OK'
         ]);
+
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Products $Products
+     * @return JsonResponse
+     */
+    public function destroy(Products $Products)
+    {
+        try{
+
+            $cart = Session::get('cart',new Cart());
+
+            $cart->destroy_Item($Products->id);
+            Session::put('cart',$cart);
+
+            Session::flash('status',__('alerts.Users.Delete.Delete_Error'));
+            return response()->json([
+                "status"=>'succes',
+            ]);
+        }catch (\Exception $e){
+            Session::flash('status',__('alerts.Users.Delete.Delete_Error'));
+            Session::flash('error',true);
+            return response()->json([
+                "status"=>'error',
+                "message"=>'error',
+            ])->setStatusCode(500);
+        }
+
+    }
+
 
 }

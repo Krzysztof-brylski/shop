@@ -39,7 +39,6 @@ function GetProducts(paginate,order) {
         ,
     }).done(function (response) {
         $('div#product_container').empty();
-        console.log(response);
         $.each(response.data,function (key,product){
 
             $('div#product_container').append(draw_product(product))
