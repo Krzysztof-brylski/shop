@@ -18,7 +18,7 @@
             <div class="cart_item_text">{{$quaintly*$item->price}} PLN</div>
         </div>
         <div>
-            <button class="btn btn-danger">U</button>
+            <button class="btn btn-danger dell-cart-item" data-cartItem_id="{{$item->id}}">U</button>
         </div>
     </div>
 </li>

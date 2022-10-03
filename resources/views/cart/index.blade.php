@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <div class="cart_container">
-                    <div class="cart_title">Shopping Cart<small> (1 item in your cart) </small></div>
+                    <div class="cart_title">Shopping Cart<small> ({{count($cart)}} item in your cart) </small></div>
                     <div class="cart_items">
                         <ul class="cart_list">
                             @foreach($cart as $item)
@@ -30,4 +30,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('javascript')
+    const DellFromCartURL='{{url('cart/dell')}}/'
+@endsection
+
+@section('js-files')
+    @vite(['resources/js/cart-action.js'])
 @endsection

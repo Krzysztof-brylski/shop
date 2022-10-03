@@ -12,6 +12,7 @@ export default defineConfig({
                 'resources/js/delete.js',
                 'resources/js/cart.js',
                 'resources/css/cart.css',
+                'resources/js/cart-action.js',
             ],
             refresh: true,
         }),

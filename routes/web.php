@@ -33,6 +33,7 @@ Route::middleware(['auth','verified'])->group(function (){
     });
     Route::get('/cart/list', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{Products}', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+    Route::post('/cart/dell/{Products}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 

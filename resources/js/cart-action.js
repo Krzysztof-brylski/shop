@@ -1,29 +1,36 @@
-function makeRequest(Method,Url,Id='') {
-    $.ajax({
-        method:Method,
-        url: Url+Id,
-    }).done(function (response) {
-       if(Method == "GET"){
-           return response;
-       }
-    });
-}
 
-$('.delete-button').click(function(){
+$('.dell-cart-item').click(function(){
+    let id= $(this).data('cartitem_id');
+    ask(id);
 
 });
 
+function makeRequest(Id) {
+    $.ajax({
+        method:"POST",
+        url: DellFromCartURL+Id,
+    }).done(function (response) {
+        window.location.reload();
+    }).fail(function (response) {
+        console.log(data.responseJSON);
+    });
+}
+function ask(id) {
+    $(function () {
+        $wal.fire({
+            title: "Sukces",
+            text: "Czy napewno chcesz usunąc ten produkt z koszyka",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: 'Tak',
+            cancelButtonText: 'Nie',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                makeRequest(id);
+                return;
+            }
+            alert('xd')
+        });
+    });
+}
 
-$(function () { $wal.fire({
-    title: "Sukces",
-    text:"Czy napewno chcesz usunąc ten produkt z koszyka",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: 'Tak',
-    cancelButtonText: 'Nie',
-}).then((result)=>{
-    if(result.isConfirmed){
-        window.location.href="/cart/list"
-    }
-    return;
-})

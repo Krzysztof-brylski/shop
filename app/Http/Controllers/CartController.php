@@ -38,7 +38,7 @@ class CartController extends Controller
     {
         $cart = Session::get('cart',new Cart());
 
-        $cart->add_item(new CartItem($Products->id));
+        $cart=$cart->add_item(new CartItem($Products->id));
 
         Session::put('cart',$cart);
         return Response()->json([
@@ -59,12 +59,16 @@ class CartController extends Controller
 
             $cart = Session::get('cart',new Cart());
 
-            $cart->destroy_Item($Products->id);
+            $cart=$cart->destroy_Item(new CartItem($Products->id));
+
+            //dd($cart->is_item_exist(new CartItem($Products->id)));
+            ////dd($cart);
             Session::put('cart',$cart);
 
             Session::flash('status',__('alerts.Users.Delete.Delete_Error'));
             return response()->json([
                 "status"=>'succes',
+
             ]);
         }catch (\Exception $e){
             Session::flash('status',__('alerts.Users.Delete.Delete_Error'));
