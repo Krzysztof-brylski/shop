@@ -18,8 +18,7 @@ function makeRequest(Id) {
 function ask(id) {
     $(function () {
         $wal.fire({
-            title: "Sukces",
-            text: "Czy napewno chcesz usunąc ten produkt z koszyka",
+            title: "Czy napewno chcesz usunąc ten produkt z koszyka",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: 'Tak',

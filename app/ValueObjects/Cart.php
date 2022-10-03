@@ -24,9 +24,9 @@ class Cart
     public function get_data(){
         return $this->items->all();
     }
-    public function is_item_exist(CartItem $dellItem){
+    public function is_item_exist($id){
         $items=$this->items;
-        if($items->contains($dellItem->getId())){
+        if(isset($items[$id])){
             return true;
         }
         return false;
@@ -35,7 +35,9 @@ class Cart
 
         $items=$this->items;
         $dellItemID=$dellItem->getId();
-        //dd($this->is_item_exist($dellItem));
+        if(!$this->is_item_exist($dellItemID)){
+            return $this;
+        }
         $quantity=$items[$dellItemID]->getQuantity();
         if($quantity > 1){
             $newItem=new CartItem($dellItemID,--$quantity);

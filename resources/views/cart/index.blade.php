@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @vite(['resources/css/cart.css'])
-
+@include('helpers.alerts')
 <div class="cart_section">
     <div class="container-fluid">
         <div class="row">

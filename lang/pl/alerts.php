@@ -11,7 +11,7 @@ return[
         ],
         'Delete'=>[
             'Delete_Alert'=>'Produkt :name, został usunięty',
-            'Edit_Error'=>'Usunięcie Produktu nie powiodło się!',
+            'Delete_Error'=>'Usunięcie Produktu nie powiodło się!',
         ],
     ],
     'Users'=>[
@@ -21,8 +21,13 @@ return[
         ],
         'Delete'=>[
             'Delete_Alert'=>'Urzytkownik :name, został usunięty',
-            'Edit_Error'=>'Usunięcie Urzytkownika nie powiodło się!',
+            'Delete_Error'=>'Usunięcie Urzytkownika nie powiodło się!',
         ],
     ],
-    'test'=>'test'
+    'Cart'=>[
+        'Delete'=>[
+            'Delete_Alert'=>'Produkt został usunięty',
+            'Delete__Error'=>'Usunięcie Produkt nie powiodło się!',
+        ],
+    ],
 ];
