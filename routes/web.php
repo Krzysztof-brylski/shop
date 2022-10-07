@@ -29,6 +29,8 @@ Route::middleware(['auth','verified'])->group(function (){
             ['products'=>'Products']
         );
         Route::get('/users/list',[UserController::class,'index'])->name('user.index');
+        Route::get('/users/edit/{user}',[UserController::class,'edit'])->name('user.edit');
+        Route::post('/users/edit/{user}',[UserController::class,'update'])->name('user.update');
         Route::delete('/users/{user}',[UserController::class,'destroy']);
     });
     Route::get('/cart/list', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');

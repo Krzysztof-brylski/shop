@@ -24,11 +24,14 @@
                 <td>{{$user->name}}</td>
                 <td>@if($user->surname == null) ### @else {{$user->surname}}@endif</td>
                 <td>@if($user->phone_number == null) ### @else {{$user->phone_number}}@endif</td>
-                @if($user->id!=Auth::user()->id)
-                    <td><button  class="btn btn-danger btn-sm delete-button" data-id="{{$user->id}}">X</button></td>
-                @else
-                    <td><button  class="btn btn-danger btn-sm " disabled>X</button></td>
-                @endif
+                <td>
+                    @if($user->id!=Auth::user()->id)
+                        <button  class="btn btn-danger btn-sm delete-button" data-id="{{$user->id}}">X</button>
+                    @else
+                       <button  class="btn btn-danger btn-sm " disabled>X</button>
+                    @endif
+                    <a class="btn btn-success" href="{{route('user.edit',$user->id)}}">E</a>
+                </td>
             </tr>
         @endforeach
         </tbody>
