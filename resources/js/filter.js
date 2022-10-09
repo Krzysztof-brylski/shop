@@ -1,3 +1,4 @@
+import {add_to_cart} from "./cart";
 
 $(function () {
     //page limit event listener
@@ -21,7 +22,7 @@ $(function () {
         event.preventDefault();
         GetProducts( $('a.page_current_lim').first().text(),$('a.current_order_selector').data('order'));
     });
-
+    setEventListener();
 });
 
 
@@ -41,11 +42,13 @@ function GetProducts(paginate,order) {
         $('div#product_container').empty();
         $.each(response.data,function (key,product){
 
-            $('div#product_container').append(draw_product(product))
+            $('div#product_container').append(draw_product(product));
 
         });
 
-    })
+    }).done(function () {
+        setEventListener();
+    });
 }
 function draw_product(product) {
     return `
@@ -58,10 +61,14 @@ function draw_product(product) {
                                     <h4 class="card-title">
                                          ${product.name}
                                     </h4>
-                                    <h5 class="card-price small text-warning">
-                                        <i>PLN ${product.price}</i>
-                                    </h5>
+                                      <a class="text-decoration-none" href="${product_url+product.id}">
+                                            <h5 class="card-price medium">
+                                                <i>PLN ${product.price}</i>
+                                            </h5>
+                                      </a>
+                                      <button class="btn btn-success add-cart-button" data-id="${product.id}" >Dodaj do koszyka</button>
                                 </div>
+                                
                             </div>        
                      </div>
             
@@ -73,3 +80,11 @@ function displayIMG(product){
     }
     return `<img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">`;
 }
+
+function setEventListener() {
+    $('button.add-cart-button').unbind();
+    $('button.add-cart-button').click(function () {
+        add_to_cart($(this).data("id"));
+    });
+}
+

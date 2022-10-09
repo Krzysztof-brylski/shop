@@ -12,7 +12,7 @@
                                 <label for="city" class="col-md-4 col-form-label text-md-end">Miasto:</label>
 
                                 <div class="col-md-6">
-                                    <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" max="255" required autocomplete="city" autofocus>
+                                    <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{$user->address->city}}" max="255" required autocomplete="city" autofocus>
 
                                     @error('city')
                                     <span class="invalid-feedback" role="alert">

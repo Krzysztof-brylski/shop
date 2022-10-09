@@ -1,13 +1,6 @@
-$(function () {
-    console.log('xd');
-    $('button.add-cart-button').click(function () {
 
-        add_to_cart($(this).data("id"))
-    });
 
-});
-
-function add_to_cart(product_id) {
+export function add_to_cart(product_id) {
     $.ajax({
         method:"POST",
         url: cart+product_id,
