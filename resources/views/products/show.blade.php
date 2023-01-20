@@ -31,18 +31,15 @@
                                     <span>{{$product->price}} zł</span>
                                 </p>
 
-                                <p class="lead font-weight-bold">Description</p>
+                                <p class="lead font-weight-bold">{{__("product.Description")}}</p>
 
                                 <p>{{$product->description}}</p>
 
-                                <form class="d-flex justify-content-left">
+                                <div class="d-flex justify-content-left">
                                     <!-- Default input -->
-                                    <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-                                    <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-                                        <i class="fas fa-shopping-cart ml-1"></i>
-                                    </button>
-
-                                </form>
+                                    <!-- <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">-->
+                                    <button class="btn btn-success add-cart-button" data-id="{{$product->id}}" @guest disabled @endguest>{{__("cart.Add")}}</button>
+                                </div>
 
                             </div>
                             <!--Content-->
@@ -58,7 +55,7 @@
                     <!--Grid row-->
                     <div class="row d-flex justify-content-center wow fadeIn">
 
-                        <h4 class="my-4 h4">Nasze propozycje:</h4>
+                        <h4 class="my-4 h4">{{__("product.Suggestions")}}</h4>
                         <div class="row">
                             @foreach($suggestions as $suggestion)
 
@@ -77,4 +74,10 @@
 
 
 
+@endsection
+@section('javascript')
+    const cart="{{url('cart')}}/";
+@endsection
+@section('js-files')
+    @vite(['resources/js/cart.js'])
 @endsection

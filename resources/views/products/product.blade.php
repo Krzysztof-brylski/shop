@@ -17,7 +17,7 @@
                     <i>PLN {{$product->price}}</i>
                 </h5>
             </a>
-            <button class="btn btn-success add-cart-button" data-id="{{$product->id}}" @guest disabled @endguest>Dodaj do koszyka</button>
+            <button class="btn btn-success add-cart-button" data-id="{{$product->id}}" @guest disabled @endguest>{{__("cart.Add")}}</button>
         </div>
     </div>
 </div>

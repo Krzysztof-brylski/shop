@@ -27,7 +27,7 @@ Route::middleware(['auth','verified'])->group(function (){
         Route::get('/products/{Products}/download',[ProductsController::class,'downloadImage'])->name('products.downloadImage');
         Route::resource('products',ProductsController::class)->parameters(
             ['products'=>'Products']
-        );
+        )->except('show');
         Route::get('/users/list',[UserController::class,'index'])->name('user.index');
         Route::get('/users/edit/{user}',[UserController::class,'edit'])->name('user.edit');
         Route::post('/users/edit/{user}',[UserController::class,'update'])->name('user.update');
@@ -37,6 +37,7 @@ Route::middleware(['auth','verified'])->group(function (){
     Route::post('/cart/{Products}', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
     Route::post('/cart/dell/{Products}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/products/{Products}', [ProductsController::class, 'show'])->name('products.show');
 });
 
 

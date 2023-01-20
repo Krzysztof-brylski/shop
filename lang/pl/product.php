@@ -15,6 +15,8 @@ return [
     'From'=>[
         'Images'=>'Obrazek',
     ],
+    'Suggestions'=>'Nasz propozycje:',
+    'Description'=>'Opis produktu:',
     'Message'=>[
         'Delete_confirm'=>'Czy napewno chcesz usunąć id:  ',
     ]

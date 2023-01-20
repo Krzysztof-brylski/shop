@@ -1,17 +1,21 @@
-
-
+function setEventListener() {
+    $('button.add-cart-button').unbind();
+    $('button.add-cart-button').click(function () {
+        add_to_cart($(this).data("id"));
+    });
+}
 export function add_to_cart(product_id) {
     $.ajax({
         method:"POST",
         url: cart+product_id,
     }).done(function () {
         $(function () { $wal.fire({
-            title: "Sukces",
-            text:"Produkt Został dodany do koszyka",
+            title: "Success",
+            text:"Product has been added to the cart",
             icon: "success",
             showCancelButton: true,
-            confirmButtonText: 'Przejdź do koszyka',
-            cancelButtonText: 'Kontynułuj zakupy',
+            confirmButtonText: 'To Shopping Cart',
+            cancelButtonText: 'Continue Shopping',
         }).then((result)=>{
             if(result.isConfirmed){
                 window.location.href="/cart/list"
@@ -21,3 +25,4 @@ export function add_to_cart(product_id) {
     })
     })
 }
+setEventListener();

@@ -66,7 +66,7 @@ function draw_product(product) {
                                                 <i>PLN ${product.price}</i>
                                             </h5>
                                       </a>
-                                      <button class="btn btn-success add-cart-button" data-id="${product.id}" >Dodaj do koszyka</button>
+                                      <button class="btn btn-success add-cart-button" data-id="${product.id}" >${addToCartBtn}</button>
                                 </div>
                                 
                             </div>        

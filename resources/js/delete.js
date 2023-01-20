@@ -5,8 +5,8 @@ $('.delete-button').click(function(){
         title: deleteMessage+" "+id,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: 'Tak',
-        cancelButtonText: 'Nie',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
     }).then((result)=>{
         if(result.value){
             $.ajax({

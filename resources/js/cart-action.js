@@ -18,11 +18,11 @@ function makeRequest(Id) {
 function ask(id) {
     $(function () {
         $wal.fire({
-            title: "Czy napewno chcesz usunąc ten produkt z koszyka",
+            title: "Are you sure?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: 'Tak',
-            cancelButtonText: 'Nie',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
         }).then((result) => {
             if (result.isConfirmed) {
                 makeRequest(id);

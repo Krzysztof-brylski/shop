@@ -12,8 +12,8 @@
                         <ul class="cart_list">
                             @foreach($cart as $item)
                                 @include('cart.cartItem',[
-                                'item'=>$item->get_item(),
-                                'quaintly'=>$item->getQuantity(),
+                                    'item'=>$item->get_item(),
+                                    'quaintly'=>$item->getQuantity(),
                                 ])
                             @endforeach
                         </ul>

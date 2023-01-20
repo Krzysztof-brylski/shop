@@ -26,17 +26,14 @@ class WelcomeController extends Controller
         $order=$request->query('order') != null ? $request->query('order') : 'asc';
 
         $query = Products::query();
-        $query->orderBy('price',strtolower($order));
+        $query=$query->orderBy('price',strtolower($order));
         if(!is_null($filters)){
             //dd($paginate);
             if(array_key_exists('categories',$filters)){
-                $query->whereIn('category_id',$filters['categories']);
+                $query=$query->whereIn('category_id',$filters['categories']);
             }
-            if(!is_null($filters['price_min'])){
-                $query->where('price','>=',$filters['price_min']);
-            }
-            if(!is_null($filters['price_max'])){
-                $query->where('price','<=',$filters['price_min']);
+            if(isset($filters['price_min']) and isset($filters['price_max'])){
+                $query=$query->whereBetween('price',[(float)$filters['price_min'], (float)$filters['price_max']]);
             }
 
             return Response()->json($query->paginate($paginate));
