@@ -5,7 +5,7 @@ namespace App\ValueObjects;
 
 use App\ValueObjects\CartItem;
 use Illuminate\Support\Collection;
-class Cart
+class Cart extends \App\ValueObjects\CartItem
 {
     private $items;
     private $total;
@@ -23,6 +23,14 @@ class Cart
     }
     public function get_data(){
         return $this->items->all();
+    }
+    public function get_assoc_array(){
+        $data= $this->items->all();
+        $arr=array();
+        foreach ($data as $item){
+            $arr[$item->ProductId]=$item->quantity;
+        }
+        return $arr;
     }
     public function is_item_exist($id){
         $items=$this->items;

@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentsController;
 use \App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
@@ -38,6 +41,10 @@ Route::middleware(['auth','verified'])->group(function (){
     Route::post('/cart/dell/{Products}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/products/{Products}', [ProductsController::class, 'show'])->name('products.show');
+
+    Route::resource('order', OrderController::class)->except(['update','edit']);;
+    Route::post('payment/status/update/{Payment:token}',[PaymentsController::class,'updateStatus'])
+        ->name('payment.status.update')->missing(function (){abort(403);});
 });
 
 

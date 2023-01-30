@@ -20,10 +20,10 @@ class CartController extends Controller
      * @return view|JsonResponse
      */
     public function index(){
-        $session=Session::get('cart',new Cart());
+        $cart=Session::get('cart',new Cart());
         return view('cart/index', [
-                'cart'=>$session->get_data(),
-                'total'=>$session->get_total()
+                'cart'=>$cart->get_data(),
+                'total'=>$cart->get_total()
             ]
         );
     }

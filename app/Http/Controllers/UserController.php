@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EditUserRequest;
-use App\Models\Adress;
+use App\Models\OrderDetails;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -86,7 +86,7 @@ class UserController extends Controller
             $address = $user->address;
             $address->fill($data);
         }else{
-            $address = new Adress($data);
+            $address = new OrderDetails($data);
         }
         $user->address()->save($address);
         return redirect(route('user.index'))->with('status',__('alerts.Users.Edit.Edit_Alert',['name'=>$user->name]));

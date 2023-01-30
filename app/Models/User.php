@@ -44,7 +44,7 @@ class User extends Authenticatable
     ];
 
     public function address(){
-        return $this->hasOne(Adress::class);
+        return $this->hasOne(OrderDetails::class);
     }
     public function hasAddress(){
         return $this->address()->exists();

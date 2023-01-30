@@ -5,8 +5,8 @@ use App\Models\Products;
 
 class CartItem{
 
-    private $ProductId;
-    private $quantity;
+    protected $ProductId;
+    protected $quantity;
 
 
     /**
