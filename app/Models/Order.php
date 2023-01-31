@@ -11,12 +11,14 @@ class Order extends Model
     use HasFactory;
     protected $fillable=[
         'status',
+        'user_id',
         'total',
         'items'
     ];
     public function payments(){
         return $this->hasOne(Payments::class,'orders_id');
     }
+
     public function orderDetails(){
         return $this->hasOne(OrderDetails::class,'orders_id');
     }

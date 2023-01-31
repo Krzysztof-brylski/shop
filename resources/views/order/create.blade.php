@@ -106,7 +106,7 @@
                             </div>
 
                         </div>
-                        <input class="btn btn-success btn-lg btn-block" type="submit" value="Continue to checkout" >
+                        <input class="btn btn-success btn-lg btn-block" type="submit" value="Make order" >
                     </form>
             </div>
         </div>

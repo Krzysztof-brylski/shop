@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->enum('status',array('inProgress','canceled','success'))->default('inProgress');
             $table->float('total')->unsigned();
             $table->json('items');

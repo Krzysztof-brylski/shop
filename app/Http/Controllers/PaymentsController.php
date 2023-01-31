@@ -16,6 +16,7 @@ class PaymentsController extends Controller
         }
         $Payments->status=$data['status'];
         $Payments->save();
+        return Response()->json("ok",200);
     }
 
 }

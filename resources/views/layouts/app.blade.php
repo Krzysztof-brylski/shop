@@ -56,9 +56,10 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @can('isAdmin')
-                                        <a class="dropdown-item" href="{{route('user.index')}}">Uzytkownicy</a>
-                                        <a class="dropdown-item" href="{{route('products.index')}}">Produkty</a>
+                                        <a class="dropdown-item" href="{{route('user.index')}}">Users</a>
+                                        <a class="dropdown-item" href="{{route('products.index')}}">Products</a>
                                     @endcan
+                                        <a class="dropdown-item" href="{{route('order.index')}}">My orders</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -6,6 +6,7 @@ use App\Http\Requests\OrderCreateRequest;
 use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use \Illuminate\Support\Facades\Session;
 use PhpParser\Node\Stmt\Return_;
@@ -14,7 +15,12 @@ class OrderController extends Controller
 {
     //
     public function index(){
-
+        if(Auth::user()->role=="user"){
+            $orders=Order::where("user_id",'=',Auth::id())->with('payments')->get();
+            return view("order/list",array(
+                'orders'=>$orders
+            ));
+        }
     }
     public function delete(){
 
@@ -24,6 +30,7 @@ class OrderController extends Controller
 
         return view("order/show",['order'=>$order->with(['payments'])->first()]);
     }
+
     public function create(){
         $cart =  Session::get('cart');
         return view("order/create",['total'=>$cart->get_total(),'items'=>$cart->get_data()]);

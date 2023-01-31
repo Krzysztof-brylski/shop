@@ -24,7 +24,7 @@
                             <div class="order_total_amount">{{$total}} PLN</div>
                         </div>
                     </div>
-                    <div class="cart_buttons"> <button type="button" class="button cart_button_clear">Continue Shopping</button> <button type="button" class="button cart_button_checkout">Add to Cart</button> </div>
+                    <div class="cart_buttons"> <button type="button" class="button cart_button_clear">Continue Shopping</button> <a href="{{route('order.create')}}" class="btn btn-primary">Got co checkout</a> </div>
                 </div>
             </div>
         </div>

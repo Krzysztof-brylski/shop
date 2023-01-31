@@ -43,10 +43,11 @@ Route::middleware(['auth','verified'])->group(function (){
     Route::get('/products/{Products}', [ProductsController::class, 'show'])->name('products.show');
 
     Route::resource('order', OrderController::class)->except(['update','edit']);;
-    Route::post('payment/status/update/{Payment:token}',[PaymentsController::class,'updateStatus'])
-        ->name('payment.status.update')->missing(function (){abort(403);});
+
 });
 
+Route::post('payment/status/update/{Payments:token}',[PaymentsController::class,'updateStatus'])
+    ->name('payment.status.update')->missing(function (){abort(403);});
 
 Auth::routes(['verify' => true]);
 

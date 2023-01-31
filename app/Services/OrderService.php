@@ -21,6 +21,7 @@ class OrderService
         $total=$cart->get_total();
         $order = new Order();
         $order->total=$total;
+        $order->user_id=Auth::id();
         $order->items=json_encode($cart->get_assoc_array());
 
         DB::transaction(function () use($total, $order,$data){
