@@ -1,8 +1,48 @@
 @extends('layouts.app')
 @section('content')
 @vite(['resources/css/app.css'])
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="container py-5">
+
+            <div class="row d-flex justify-content-center align-items-center my-3">
+
+                <div class="col-12">
+                    <div class="card card-stepper text-black p-5" style="border-radius: 16px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Name</th>
+                                        <th>Retail price</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($items as $item)
+                                    <tr>
+                                        <td>
+                                            <img width="100px" height="100px" src="{{asset("storage/".$item->image)}}">
+                                        </td>
+                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->price}}PLN</td>
+                                        <td>{{$order->getItemsArray()[(int)$item->id]}}</td>
+                                        <td>{{ (float)($order->getItemsArray()[(int)$item->id])*(float)$item->price }}PLN</td>
+                                    </tr>
+                                @endforeach
+                                    <tr>
+                                        <th colspan="4" style="text-align: right;">
+                                            Total:
+                                        </th>
+                                        <th>
+                                            {{$order->total}} PLN
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center align-items-center  my-5">
                 <div class="col-12">
                     <div class="card card-stepper text-black" style="border-radius: 16px;">
 
@@ -62,5 +102,9 @@
                 </div>
             </div>
         </div>
-
+        <!--
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary">Download invoice</button>
+        </div>
+        ->>
 @endsection

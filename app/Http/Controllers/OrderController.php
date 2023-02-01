@@ -18,7 +18,7 @@ class OrderController extends Controller
         if(Auth::user()->role=="user"){
             $orders=Order::where("user_id",'=',Auth::id())->with('payments')->get();
             return view("order/list",array(
-                'orders'=>$orders
+                'orders'=>$orders,
             ));
         }
     }
@@ -28,7 +28,10 @@ class OrderController extends Controller
 
     public function show(Order $order){
 
-        return view("order/show",['order'=>$order->with(['payments'])->first()]);
+        return view("order/show",[
+            'order'=>$order->with(['payments'])->first(),
+            'items'=>$order->getProducts(),
+        ]);
     }
 
     public function create(){

@@ -27,4 +27,10 @@ class Order extends Model
         $statement = DB::select("show table status like 'orders'");
         return $statement[0]->Auto_increment;
     }
+    public function getItemsArray(){
+        return json_decode($this->items,true);
+    }
+    public function getProducts(){
+        return Products::wherein('id',array_keys($this->getItemsArray()))->get();
+    }
 }
