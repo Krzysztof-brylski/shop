@@ -48,6 +48,8 @@ class OrderService
             $order->payments()->save($payment);
             $order->orderDetails()->save($details);
         });
+        Session::forget('cart');
         return $order->payments->token;
     }
+
 }

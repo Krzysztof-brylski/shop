@@ -42,7 +42,7 @@ Route::middleware(['auth','verified'])->group(function (){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/products/{Products}', [ProductsController::class, 'show'])->name('products.show');
 
-    Route::resource('order', OrderController::class)->except(['update','edit']);;
+    Route::resource('order', OrderController::class)->except(['update','edit']);
 
 });
 

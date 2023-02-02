@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChangeOrderStatusEvent;
 use App\Models\Payments;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class PaymentsController extends Controller
         }
         $Payments->status=$data['status'];
         $Payments->save();
+        event(new ChangeOrderStatusEvent($Payments->order,$data['status']));
         return Response()->json("ok",200);
     }
 

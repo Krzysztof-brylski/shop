@@ -102,9 +102,4 @@
                 </div>
             </div>
         </div>
-        <!--
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-primary">Download invoice</button>
-        </div>
-        ->>
 @endsection

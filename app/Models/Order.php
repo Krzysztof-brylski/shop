@@ -15,6 +15,13 @@ class Order extends Model
         'total',
         'items'
     ];
+    public function setStatus($status){
+        $this->status=$status;
+        $this->save();
+    }
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
     public function payments(){
         return $this->hasOne(Payments::class,'orders_id');
     }

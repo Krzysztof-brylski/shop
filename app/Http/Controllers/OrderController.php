@@ -14,13 +14,19 @@ use PhpParser\Node\Stmt\Return_;
 class OrderController extends Controller
 {
     //
+
     public function index(){
-        if(Auth::user()->role=="user"){
+        if(!Auth::user()->can('isAdmin')){
             $orders=Order::where("user_id",'=',Auth::id())->with('payments')->get();
             return view("order/list",array(
                 'orders'=>$orders,
             ));
         }
+        $pagination=Order::with(['payments','user','orderDetails'])->paginate(10);
+        return view("order/index",array(
+            'orders'=>$pagination,
+        ));
+
     }
     public function delete(){
 
