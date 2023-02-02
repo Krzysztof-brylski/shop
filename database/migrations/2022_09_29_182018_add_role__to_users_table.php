@@ -33,7 +33,7 @@ return new class extends Migration
         });
     }
     private function userGateRole( $name, $role){
-        Gate::define($name,function (User $user) use($role){
+        Gate::define($name, function (User $user) use($role){
             return $user->role == $role;
         });
     }

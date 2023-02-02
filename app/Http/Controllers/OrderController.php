@@ -14,6 +14,10 @@ use PhpParser\Node\Stmt\Return_;
 class OrderController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('can:showOrder,order',['only'=>['show']]);
+    }
 
     public function index(){
         if(!Auth::user()->can('isAdmin')){
@@ -33,7 +37,6 @@ class OrderController extends Controller
     }
 
     public function show(Order $order){
-
         return view("order/show",[
             'order'=>$order->with(['payments'])->first(),
             'items'=>$order->getProducts(),
