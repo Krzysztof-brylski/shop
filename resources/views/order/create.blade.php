@@ -5,7 +5,6 @@
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your cart</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
                 </h4>
                 <ul class="list-group mb-3">
                     @foreach($items as $item)
@@ -20,15 +19,24 @@
                             <span class="text-muted">{{$item->get_item()->price * $item->getQuantity()}} PLN</span>
                         </li>
                     @endforeach
-
+                    <!--<li class="list-group-item d-flex justify-content-between bg-light">
+                        <div class="text-success">
+                            <h6 class="my-0">Promo code</h6>
+                            <small>EXAMPLECODE</small>
+                        </div>
+                        <span class="text-success">−5PLN</span>
+                    </li>-->
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (PLN)</span>
                         <strong>{{$total}}PLN</strong>
                     </li>
                 </ul>
-
-
-
+                <div class="card p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Promo code">
+                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div>
+                </div>
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Billing address</h4>
@@ -110,5 +118,5 @@
                     </form>
             </div>
         </div>
-
+    </div>
 @endsection
