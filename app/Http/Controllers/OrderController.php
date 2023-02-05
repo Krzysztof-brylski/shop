@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderCreateRequest;
 use App\Models\Order;
 use App\Services\OrderService;
+use App\ValueObjects\OrderVO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -42,17 +43,35 @@ class OrderController extends Controller
             'items'=>$order->getProducts(),
         ]);
     }
-
+    public function applyPromoCode(Request $request){
+        if(!Session::exists('order')){
+            abort(403);
+        }
+        $order=Session::get('order');
+        $code=$request->validate(['code'=>'string|required']);
+        $order=$order->applyPromoCode($code['code']);
+        Session::forget('order');
+        Session::put(['order'=>$order]);
+        return Redirect::back();
+    }
     public function create(){
+
+        if(Session::exists('order')){
+            return view("order/create",['order'=>Session::get('order')]);
+        }
+
         $cart =  Session::get('cart');
-        return view("order/create",['total'=>$cart->get_total(),'items'=>$cart->get_data()]);
+        $order= new OrderVO($cart->get_total(), $cart->get_data());
+        Session::put(["order"=>$order]);
+        return view("order/create",['order'=>$order]);
     }
     public function store(OrderCreateRequest $request){
         $data=$request->validated();
-        if(is_null(Session::get('cart'))){
+        if(!Session::exists('cart')){
             return Redirect::back()->with(['error'=>'Session_empty']);
         }
         $orderPaymentToken=(new OrderService())->createOrder($data);
+        Session::forget('order');
         return Redirect::away("http://127.0.0.1:8888/payment/$orderPaymentToken");
     }
 

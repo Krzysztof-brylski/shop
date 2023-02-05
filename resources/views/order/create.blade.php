@@ -7,7 +7,7 @@
                     <span class="text-muted">Your cart</span>
                 </h4>
                 <ul class="list-group mb-3">
-                    @foreach($items as $item)
+                    @foreach($order->items as $item)
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div class="d-flex justify-content-center align-items-center">
                                 <img style="border-radius: 15px; border: 1px transparent solid; margin-right: 20px" height="75px" width="75px" src="{{asset("storage/".$item->get_item()->image)}}">
@@ -19,24 +19,33 @@
                             <span class="text-muted">{{$item->get_item()->price * $item->getQuantity()}} PLN</span>
                         </li>
                     @endforeach
-                    <!--<li class="list-group-item d-flex justify-content-between bg-light">
-                        <div class="text-success">
-                            <h6 class="my-0">Promo code</h6>
-                            <small>EXAMPLECODE</small>
-                        </div>
-                        <span class="text-success">−5PLN</span>
-                    </li>-->
+                    @if(!is_null($order->promoCode))
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                <div class="text-success">
+                                    <h6 class="my-0">Promo code</h6>
+                                    <small>{{array_key_first($order->promoCode)}}</small>
+                                </div>
+                                <span class="text-success">−{{$order->promoCode[array_key_first($order->promoCode)]}}PLN</span>
+                            </li>
+                    @endif
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (PLN)</span>
-                        <strong>{{$total}}PLN</strong>
+                        <strong>{{$order->total}}PLN</strong>
                     </li>
                 </ul>
-                <div class="card p-2">
+                <form class="card p-2" action="{{route('order.applyPromoCode')}}" method="post">
+                    @if(array_key_exists('Error',$order->messages))
+                        <div class="alert-danger alert alert-dismissible fade show">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            {{$order->messages['Error']}}
+                        </div>
+                    @endif
+                    @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Promo code">
+                        <input type="text" name="code" class="form-control" placeholder="Promo code">
                         <button type="submit" class="btn btn-secondary">Redeem</button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Billing address</h4>

@@ -4,12 +4,15 @@
 namespace App\ValueObjects;
 
 
+use App\Models\PromoCode;
+
 class OrderVO
 {
     public $total;
     public $items;
     public $promoCode;
     public $messages;
+    private $promoCodes;
 
 
     public function __construct($total, array $items, $promoCode=null, $messages=null){
@@ -18,8 +21,14 @@ class OrderVO
         $this->promoCode=$promoCode;
         $this->messages=$messages;
     }
-
-    public function apply_promo_code($code){
+    private function getPromoCodes(){
+        $promoCodes=PromoCode::all();
+        foreach ($promoCodes as $code){
+            $this->promoCodes[$code->code]=$code->discount;
+        }
+    }
+    public function applyPromoCode($code){
+        $this->getPromoCodes();
         if(!is_null($this->promoCode)){
             //if promo code is used more than once
             return new OrderVO(
@@ -31,10 +40,14 @@ class OrderVO
                 )
             );
         }
-        $promoCodes=array(
-            "test"=>-5,
-        );
-        if(!array_key_exists($code,$promoCodes)){
+
+        /**
+          * for tests only !
+          *      $promoCodes=array(
+          *          "test"=>-5,
+          *     );
+         */
+        if(!array_key_exists($code,$this->promoCodes)){
             //if promo code does not exists
             return new OrderVO(
                 $this->total,
@@ -47,9 +60,9 @@ class OrderVO
         }
         // successfully used promo code
         return new OrderVO(
-            ($this->total-$promoCodes[$code]),
+            ($this->total-$this->promoCodes[$code]),
             $this->items,
-            [$code=>$promoCodes[$code]],
+            [$code=>$this->promoCodes[$code]],
             array(
                 "Success"=>"Promo code used successfully!",
             )
