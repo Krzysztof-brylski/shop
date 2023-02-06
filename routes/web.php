@@ -35,6 +35,7 @@ Route::middleware(['auth','verified'])->group(function (){
         Route::get('/users/list',[UserController::class,'index'])->name('user.index');
         Route::get('/users/edit/{user}',[UserController::class,'edit'])->name('user.edit');
         Route::post('/users/edit/{user}',[UserController::class,'update'])->name('user.update');
+        Route::post('/order/markDelivered/{order}',[OrderController::class,'markDelivered'])->name('order.markDelivered');
         Route::delete('/users/{user}',[UserController::class,'destroy']);
         Route::resource('promoCode',PromoCodesController::class)->except(['show','update','edit']);
     });

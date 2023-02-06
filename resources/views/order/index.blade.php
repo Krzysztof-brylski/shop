@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
+
     <div class="container">
+        @include('helpers/alerts')
         <h2>Clinet orders</h2>
         <table class="table table-hover">
             <thead>
@@ -20,17 +22,18 @@
                     <td scope="row">{{$order->status}}</td>
                     <td>{{$order->payments->status}}</td>
                     <td>{{$order->total}} PLN</td>
-                    <td style="text-align: center;">
-                        <a class="btn btn-info" href="#" >See User</a>
-                        <a class="btn btn-info" href="#" >See Details</a>
+                    <td style="text-align: center;" class="d-flex">
                         <a class="btn btn-info" href="{{route("order.show",['order'=>$order->id])}}" >See Order</a>
-                        <a class="btn btn-info" href="#" >See Payment</a>
-                        <br>
-                        <a class="btn btn-danger" href="#" >Delete Order</a>
-                        <a class="btn btn-success" href="#" >Mark Delivered</a>
+                        <form method="post" action="{{route("order.markDelivered",['order'=>$order->id])}}">
+                            @csrf
+                            <button type="submit" class="btn btn-success">Mark Delivered</button>
+                        </form>
+                        <form method="post" action="{{route("order.destroy",['order'=>$order->id])}}">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Delete Order</button>
+                        </form>
                     </td>
-
-
                 </tr>
             @endforeach
             <tbody>

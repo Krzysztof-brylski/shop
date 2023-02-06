@@ -79,8 +79,8 @@
                 <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
                 <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">{{__("welcome.Headers.Price")}}</h6>
                 <div class="price-filter-control">
-                    <input type="number" class="form-control w-50 pull-left mb-2" min="0" placeholder="50" value="50" name="filters[price_min]" id="price-min-control">
-                    <input type="number" class="form-control w-50 pull-right" min="0" placeholder="150" value="150" name="filters[price_max]" id="price-max-control">
+                    <input type="number" class="form-control w-50 pull-left mb-2" min="0" placeholder="50"  name="filters[price_min]" id="price-min-control">
+                    <input type="number" class="form-control w-50 pull-right" min="0" placeholder="150" name="filters[price_max]" id="price-max-control">
                 </div>
                 <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
                 <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>

@@ -27,7 +27,17 @@ return[
     'Cart'=>[
         'Delete'=>[
             'Delete_Alert'=>'Product, has been deleted',
-            'Delete__Error'=>'Product deleting filed!',
+            'Delete_Error'=>'Product deleting filed!',
         ],
     ],
+    'Order'=>[
+        'Delete'=>[
+            'Delete_Alert'=>'Order has been deleted'
+        ],
+        'Status'=>[
+            'Status_Alert'=>'Status has been changed',
+            'Status_Error'=>'Status has NOT been changed'
+        ]
+
+    ]
 ];

@@ -6,6 +6,7 @@ use App\Http\Requests\OrderCreateRequest;
 use App\Models\Order;
 use App\Services\OrderService;
 use App\ValueObjects\OrderVO;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -33,10 +34,22 @@ class OrderController extends Controller
         ));
 
     }
-    public function delete(){
-
+    public function destroy(Order $order){
+        $order->orderDetails()->delete();
+        $order->payments()->delete();
+        $order->delete();
+        return back()->with('status',__('alerts.Order.Delete.Delete_Alert'))
+            ->with('error',false);
     }
-
+    public function markDelivered(Order $order){
+        if($order->status != "inProgress"){
+            return back()->with('status',__('alerts.Order.Status.Status_Error'))
+                ->with('error', true);
+        }
+        $order->setStatus("success");
+        return back()->with('status',__('alerts.Order.Status.Status_Alert'))
+            ->with('error',false);
+    }
     public function show(Order $order){
         return view("order/show",[
             'order'=>$order->with(['payments'])->first(),
