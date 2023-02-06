@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        @include('helpers/alerts')
         <div class="d-flex justify-content-between">
             <h2>Promotion Codes</h2>
             <a class="btn btn-success" href="{{route('promoCode.create')}}">Create Code</a>

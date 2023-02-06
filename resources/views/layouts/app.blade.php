@@ -58,6 +58,7 @@
                                     @can('isAdmin')
                                         <a class="dropdown-item" href="{{route('user.index')}}">Users</a>
                                         <a class="dropdown-item" href="{{route('products.index')}}">Products</a>
+                                        <a class="dropdown-item" href="{{route('promoCode.index')}}">Promo codes</a>
                                     @endcan
                                         <a class="dropdown-item" href="{{route('order.index')}}">My orders</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

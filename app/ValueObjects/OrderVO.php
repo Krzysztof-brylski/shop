@@ -36,7 +36,7 @@ class OrderVO
                 $this->items,
                 $this->promoCode,
                 array(
-                    "Error"=>"Promo code is already used!",
+                    "Error"=>__('alerts.Order.PromoCode.Error_Already_Used'),
                 )
             );
         }
@@ -54,7 +54,7 @@ class OrderVO
                 $this->items,
                 null,
                 array(
-                    "Error"=>"Promo code does not exists!",
+                    "Error"=>__('alerts.Order.PromoCode.Error_Dont_Exist'),
                 )
             );
         }
@@ -64,7 +64,7 @@ class OrderVO
             $this->items,
             [$code=>$this->promoCodes[$code]],
             array(
-                "Success"=>"Promo code used successfully!",
+                "Success"=>__('alerts.Order.PromoCode.Success'),
             )
         );
     }

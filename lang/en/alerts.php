@@ -37,7 +37,13 @@ return[
         'Status'=>[
             'Status_Alert'=>'Status has been changed',
             'Status_Error'=>'Status has NOT been changed'
+        ],
+        'PromoCode'=>[
+            'Create'=>'Promotion code has been created',
+            'Delete'=>'Promotion code has been deleted',
+            'Success'=>'Promo code used successfully!',
+            'Error_Already_Used'=>'Promo code is already used!',
+            'Error_Dont_Exist'=>'Promo code does not exists!',
         ]
-
     ]
 ];

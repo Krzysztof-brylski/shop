@@ -43,18 +43,20 @@ class PromoCodesController extends Controller
         //todo validation
         $data=$request->all();
         PromoCode::create($data);
-        return Redirect::to(route("promoCode.index"));
+        return Redirect::to(route("promoCode.index"))->with('status',__('alerts.Order.PromoCode.Create'))
+            ->with('error',false);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param PromoCode $promoCode
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PromoCode $promoCode)
     {
-        PromoCode::find($id)->delete();
-        return back();
+        $promoCode->delete();
+        return back()->with('status',__('alerts.Order.PromoCode.Delete'))
+            ->with('error',false);
     }
 }

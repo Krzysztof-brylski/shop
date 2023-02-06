@@ -6,7 +6,7 @@
         <li>Adding and editing products</li>
         <li>filtering products, displaying product page</li>
         <li>Shoping cart (only for registered users)</li>
-        <li>Making orders, symulating payment (only for registered users)</li>
+        <li>Making orders, symulating payment, using promotion codes (only for registered users)</li>
     </ul>
 </p>
 
